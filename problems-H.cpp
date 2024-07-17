@@ -54,9 +54,10 @@ void solve() {
     while(n - x > 0 && k--){
         p -= x;
         ans += p;
+        ans%=MOD;
         x += 1;
     }
-    cout << ans + n << ln;
+    cout << (ans + n) % MOD << ln;
 }
 
 int main() {
