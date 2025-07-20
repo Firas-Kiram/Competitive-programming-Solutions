@@ -6,10 +6,11 @@ using namespace std;
 #define pb push_back
 #define ll long long
 #define all(x) (x).begin(), (x).end()
-
+ 
 const int N = 2e5 + 100 , LOG = 32;
-
+  
 int main(){
+    // freopen("func.in" , "r" , stdin);
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     ll n , k ; cin >> n >> k; 
@@ -27,7 +28,8 @@ int main(){
     }
     for(int i = 1 ; i < LOG ; i ++) {
         for(int j = 1 ; j <= n * 2 ; j ++) {
-            anc[j][i] = anc[anc[j][i - 1]][i - 1];
+            if(anc[j][i - 1] >= 2 * n) anc[j][i] = 2 * n;
+            else anc[j][i] = anc[anc[j][i - 1]][i - 1];
         }
     }
     int mn = (int)1e8;
