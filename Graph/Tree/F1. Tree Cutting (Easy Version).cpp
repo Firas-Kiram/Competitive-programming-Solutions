@@ -8,28 +8,18 @@ using namespace std;
 #define all(x) (x).begin(), (x).end()
 
 const int N = 3e5 + 100 , LOG = 21;
-vector <int> edj[N] , R , B , dp , lvl , CR , CB;
+vector <int> edj[N] , R , B , lvl , CR , CB;
 int ans = 0 , b = 0 , r = 0;
 void dfs(int node) {
-    dp[node] = 0;
     CR[node] = R[node] , CB[node] = B[node];
     for(auto to : edj[node]) {
         if(lvl[to] == 0) {
             lvl[to] = lvl[node] + 1;
             dfs(to);
-            dp[node] += dp[to];
-            CB[node] += CB[to];
-            CR[node] += CR[to];
-        }else if(lvl[node] > lvl[to]) {
-            dp[node] ++ ;
-        }else if(lvl[node] < lvl[to]) {
-            dp[node] -- ;
+            CB[node] += CB[to] , CR[node] += CR[to];
         }
     }
-    dp[node] -- ;
-    if(lvl[node] > 1 && dp[node] == 0) {
-        if((CR[node] == r && CB[node] == 0) || CB[node] == b && CR[node] == 0) ans ++ ;
-    }
+    if((CR[node] == r && CB[node] == 0) || CB[node] == b && CR[node] == 0) ans ++ ;
 }
 
 int main(){
@@ -39,7 +29,7 @@ int main(){
     // cin >> tt;
     while(tt --) {
         int n , st = -1; cin >> n;
-        R = B = CR = CB = dp = lvl = vector <int>(n + 1 , {});
+        R = B = CR = CB = lvl = vector <int>(n + 1 , {});
         for(int i = 1 ; i <= n ; i ++) {
             int x ; cin >> x;
             if(x == 1) R[i] ++ , r ++;
