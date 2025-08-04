@@ -1,3 +1,6 @@
+/*
+	problem : Baltic OI '01 P1 - Postman - https://dmoj.ca/problem/btoi01p1
+*/
 #include <bits/stdc++.h>
 using namespace std;
  
